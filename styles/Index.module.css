@@ -4,13 +4,22 @@
   grid-template-rows: auto 1fr auto;
   grid-template-columns: 100%;
   grid-gap: 10px;
-  background-color: white;
+  background-color: #D6E4E5;
   text-align: center;
   padding: 10px;
+  color: #497174;
 }
 
 .item {
-  background-color: red;
   padding: 10px;
+  border: solid 1px #497174;
 }
 
+.card {
+  height: 500px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  border: solid 1px #497174;
+  justify-content: center;
+}
