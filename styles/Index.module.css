@@ -11,15 +11,19 @@
 }
 
 .item {
+  display: flex;
+  justify-content: center;
   padding: 10px;
   border: solid 1px #497174;
 }
 
-.card {
-  height: 500px;
-  width: 500px;
+.header {
   display: flex;
   flex-direction: column;
+}
+
+.card {
+  height: 200px;
+  width: 400px;
   border: solid 1px #497174;
-  justify-content: center;
 }
