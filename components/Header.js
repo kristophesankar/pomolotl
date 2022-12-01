@@ -1,4 +1,4 @@
-import {item, header} from '../styles/Index.module.css'
+import {item, header} from '../styles/Index.module.sass'
 export default function Header () {
   return (
     <div className={item}>
