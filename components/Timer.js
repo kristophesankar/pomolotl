@@ -1,7 +1,7 @@
 export default function Timer () {
   return (
     <div>
-     timer goes here
+      25:00
     </div>
   )
 }

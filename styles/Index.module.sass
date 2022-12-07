@@ -1,4 +1,5 @@
-$btn-radius: 5px
+$global-radius: 5px
+$global-padding: 10px
 
 .container
   min-height: 100vh
@@ -8,34 +9,29 @@ $btn-radius: 5px
   grid-gap: 10px
   background-color: #D6E4E5
   text-align: center
-  padding: 10px
+  padding: $global-padding
   color: #497174
-
 
 .item
   display: flex
   justify-content: center
-  padding: 10px
-  border: solid 1px #497174
-
+  padding: $global-padding
 
 .header
   display: flex
   flex-direction: column
 
-
 .card
+  padding: $global-padding
   height: 200px
   width: 400px
   border: solid 1px #497174
-
+  border-radius: $global-radius
 
 .timerNav
   display: flex
   flex-direction: row
   justify-content: space-evenly
 
-
 .btn
-  border-radius: $btn-radius
-
+  border-radius: $global-radius
