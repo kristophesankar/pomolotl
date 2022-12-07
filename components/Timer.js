@@ -1,7 +1,8 @@
+import {timer} from '@/styles/Index.module.sass'
 export default function Timer () {
   return (
-    <div>
-      25:00
+    <div class={timer}>
+      <h1>25:00</h1>
     </div>
   )
 }

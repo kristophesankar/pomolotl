@@ -1,13 +1,12 @@
-$global-radius: 5px
-$global-padding: 10px
+@import '@/styles/theme.sass'
 
 .container
-  min-height: 100vh
+  min-height: calc(100vh - $global-padding - 10px)
   display: grid
   grid-template-rows: auto 1fr auto
   grid-template-columns: 100%
   grid-gap: 10px
-  background-color: #D6E4E5
+  background-color: $background
   text-align: center
   padding: $global-padding
   color: #497174
@@ -25,7 +24,7 @@ $global-padding: 10px
   padding: $global-padding
   height: 200px
   width: 400px
-  border: solid 1px #497174
+  background: $dark-blue
   border-radius: $global-radius
 
 .timerNav
@@ -34,4 +33,17 @@ $global-padding: 10px
   justify-content: space-evenly
 
 .btn
+  border: 0px
+  min-width: 100px
+  background: $cyan
+  color: $background
   border-radius: $global-radius
+  padding: $btn-padding
+
+.timer
+  padding: $global-padding
+
+.footer
+  width: 100vw
+  border-top: solid 1px $dark-blue
+  padding: $global-padding
