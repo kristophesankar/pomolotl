@@ -3,8 +3,7 @@ export default function Header () {
   return (
     <div className={item}>
       <div className={header}>
-        <h1>DoroTimer</h1>
-        <p>A pomodoro timer!</p>
+        <h1>dorotimer</h1>
       </div>
     </div>
   );

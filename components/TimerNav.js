@@ -1,10 +1,11 @@
 import {timerNav, btn} from '@/styles/Index.module.sass'
+import Button from '@/components/Button'
 export default function TimerNav () {
   return (
     <div className={timerNav}>
-        <button className={btn}>Pomodoro</button>
-        <button className={btn}>Short Break</button>
-        <button className={btn}>Long Break</button>
+        <Button title='Pomodoro' />
+        <Button title='Short Break' />
+        <Button title='Long Break' />
     </div>
   )
 }

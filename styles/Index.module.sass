@@ -9,7 +9,6 @@
   background-color: $background
   text-align: center
   padding: $global-padding
-  color: #497174
 
 .item
   display: flex
@@ -21,11 +20,11 @@
   flex-direction: column
 
 .card
-  padding: $global-padding
-  height: 200px
-  width: 400px
+  padding: calc($global-padding * 2)
+  height: fit-content
+  width: fit-content
   background: $dark-blue
-  border-radius: $global-radius
+  border-radius: calc($global-radius * 2)
 
 .timerNav
   display: flex
@@ -33,7 +32,7 @@
   justify-content: space-evenly
 
 .btn
-  border: 0px
+  border: 0
   min-width: 100px
   background: $cyan
   color: $background
@@ -42,6 +41,8 @@
 
 .timer
   padding: $global-padding
+  font-size: 2.5em
+  margin: 0
 
 .footer
   width: 100vw
