@@ -2,8 +2,6 @@ import { timer as timerClass, btn } from '@/styles/Index.module.sass'
 import { useEffect, useState } from 'react'
 import Button from '@/components/Button'
 
-const startTimer = (timeLeft, setTimeLeft) => {}
-
 export default function Timer() {
   let [timeLeft, setTimeLeft] = useState(25)
   let [paused, setPaused] = useState(true)
@@ -33,7 +31,6 @@ export default function Timer() {
       return () => clearInterval(id)
     }
   })
-
   return (
     <div className={timerClass}>
       <h1 className={timerClass}>{timeLeft}:00</h1>
