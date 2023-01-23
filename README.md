@@ -1,11 +1,11 @@
-# DoroTimer
-## Introduction
+# ⏱️ DoroTimer
+#  Introduction
 (This is in active development) A pomodoro timer web app built with Next js and XSTATE!
 
 # Latest Update
 - Logic of timer works, but in a very rudimentary manner. 
 
-## TODO
+# TODO
 ### Coding
 - convert react component state of timer to XSTATE
 - add mobile responsivity
