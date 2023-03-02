@@ -6,6 +6,7 @@
         "@/styles/*" : ["styles/*"],
         "@/config/*" : ["config/*"],
         "@/fonts/*" : ["fonts/*"],
+        "@/stateMachines/*" : ["stateMachines/*"],
       }
   }
 }
