@@ -3,7 +3,7 @@
 (This is in active development) A pomodoro timer web app built with Next js and XSTATE!
 
 # State Chart
-- An interactive state chart for the state machine can be found here: State Chart(https://stately.ai/viz/b5311ee3-ad7d-45d5-b3df-247d2e31bf23)
+- An interactive state chart for the state machine can be found here: (State Chart)(https://stately.ai/viz/b5311ee3-ad7d-45d5-b3df-247d2e31bf23)
 
 # Latest Updates
 - The main state machine has been modeled with xstate.
