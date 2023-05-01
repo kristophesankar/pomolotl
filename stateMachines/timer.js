@@ -9,12 +9,12 @@ import {
   stop,
 } from "xstate";
 
-const padTo2Digits = ( number) => {
+const padTo2Digits = (num) => {
   return num.toString().padStart(2, "0");
 };
 
 const initContext = {
-  duration: 25,
+  duration: 5,
   current: 0,
   timeLeft: "",
   interval: 1,
@@ -128,7 +128,17 @@ const focus = {
   invoke: {
     id: "timerInner",
     src: (context) => context.timerInner,
-    onDone: { target: "shortBreak" },
+    onDone: [
+      {
+        target: "shortBreak",
+        actions: ["updateTimesRun"],
+        cond: (context) => context.timesRun < 3,
+      },
+      {
+        target: "longBreak",
+        actions: ["resetTimesRun"],
+      },
+    ],
   },
   on: {
     START: {
@@ -141,7 +151,9 @@ const shortBreak = {
   invoke: {
     id: "timerInner",
     src: (context) => context.timerInner,
-    onDone: { target: "focus" },
+    onDone: {
+      target: "focus",
+    },
   },
   on: {
     START: {
@@ -154,7 +166,10 @@ const longBreak = {
   invoke: {
     id: "timerInner",
     src: (context) => context.timerInner,
-    onDone: { target: "focus" },
+    onDone: {
+      target: "focus",
+
+    },
   },
   on: {
     START: {
@@ -184,9 +199,10 @@ const appActions = {
     context.timerInner.stop();
   },
   updateTimesRun: assign({
-    timesRun: (context) => {
-      context.timesRun + 1;
-    },
+    timesRun: (context) => context.timesRun + 1,
+  }),
+  resetTimesRun: assign({
+    timesRun: 0,
   }),
   spawnFocusTimer: assign({
     timerInner: (context, event) => {

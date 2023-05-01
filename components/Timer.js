@@ -1,11 +1,11 @@
 import { timer as timerClass, btn } from '@/styles/Index.module.sass'
-import { useMachine } from '@xstate/react';
-import {timerMachine} from '@/stateMachines/timer'
+//import { useMachine } from '@xstate/react';
+//import {timerMachine} from '@/stateMachines/timer'
 import { useEffect, useState } from 'react'
 import Button from '@/components/Button'
 
 export default function Timer() {
-  const [current, send ] = useMachine(timerMachine);
+ // const [current, send ] = useMachine(timerMachine);
 
   let [timeLeft, setTimeLeft] = useState(25)
   let [paused, setPaused] = useState(true)
