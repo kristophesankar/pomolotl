@@ -4,6 +4,7 @@
 
 # State Chart
 - An interactive state chart for the state machine can be found here: (State Chart)(https://stately.ai/viz/b5311ee3-ad7d-45d5-b3df-247d2e31bf23)
+![state_chart_1](https://user-images.githubusercontent.com/33190221/235471827-028b006c-bc4a-4020-b4d6-b0a803e9b405.png)
 
 # Latest Updates
 - The main state machine has been modeled with xstate.
