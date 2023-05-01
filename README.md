@@ -1,10 +1,18 @@
 # ⏱️ DoroTimer
 #  Introduction
-(This is in active development) A pomodoro timer web app built with Next js and XSTATE!
+(This is in active development) A pomodoro timer web app built with Next js and XSTATE! 
+
+# Background / Motivation
+Pomodoro is a time management technique developed by Francesco Cirillo in the late 1980s. The technique involves breaking work into focused intervals of 25 minutes, called "Pomodoros," separated by short breaks of 5-10 minutes. After four Pomodoros, a longer break of 15-30 minutes is taken.
+
+The idea behind the Pomodoro technique is that by breaking work into smaller, more manageable intervals, it becomes easier to focus and avoid distractions. It also helps to prevent burnout by providing regular breaks to rest and recharge.
+
+The name "Pomodoro" comes from the Italian word for tomato, which is what Cirillo used as a timer when he first developed the technique. Today, there are many digital Pomodoro timers available, making it easy to implement the technique in your work routine.
 
 # State Chart
 - An interactive state chart for the state machine can be found here: (State Chart)(https://stately.ai/viz/b5311ee3-ad7d-45d5-b3df-247d2e31bf23)
 ## State Chart 1
+
 ![state_chart_1](https://user-images.githubusercontent.com/33190221/235471827-028b006c-bc4a-4020-b4d6-b0a803e9b405.png)
 ## State Chart 2
 ![state_chart_2](https://user-images.githubusercontent.com/33190221/235472190-231cc4f8-8bb9-4094-8d67-c71edfe94e24.png)
