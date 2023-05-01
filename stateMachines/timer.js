@@ -233,7 +233,7 @@ const appActions = {
   ),
 };
 
-const service = interpret(
+export const service = interpret(
   createMachine(appConfiguration, {
     actions: appActions,
   })

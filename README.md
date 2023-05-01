@@ -2,23 +2,27 @@
 #  Introduction
 (This is in active development) A pomodoro timer web app built with Next js and XSTATE!
 
-# Latest Update
-- Logic of timer works, but in a very rudimentary manner. 
+# State Chart
+- An interactive state chart for the state machine can be found here: State Chart(https://stately.ai/viz/b5311ee3-ad7d-45d5-b3df-247d2e31bf23)
+
+# Latest Updates
+- The main state machine has been modeled with xstate.
+- Work out state diagram for a pomodoro cycle.
+- Basic prototype working in react.
 
 # TODO
 ### Coding
-- convert react component state of timer to XSTATE
+- integrate the xstate state machine that was built in stately.ai into the timer - in progress
 - add mobile responsivity
+- convert react component state of timer to XSTATE - done
 
 ### Design
-- create a pixel perfect design of app
-- create screen flow for app usage
+- create a pixel perfect design of app - in progress
+- create screen flow for app usage - in progress
 
 # Running the development server
 
 ```bash
-npm run dev
-# or
 yarn dev
 ```
 
