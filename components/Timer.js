@@ -1,6 +1,4 @@
 import { timer as timerClass, btn } from '@/styles/Index.module.sass'
-import { useInterpret, useMachine } from '@xstate/react'
-import { pomodoroMachine } from '@/stateMachines/timer'
 import { useEffect, useState } from 'react'
 import Button from '@/components/Button'
 export default function Timer() {
