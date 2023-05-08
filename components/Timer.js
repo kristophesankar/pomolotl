@@ -1,45 +1,16 @@
+import { useContext } from 'react';
 import { timer as timerClass, btn } from '@/styles/Index.module.sass'
-import { useEffect, useState } from 'react'
 import Button from '@/components/Button'
+import { createMachine } from 'xstate';
+import { useActor, useInterpret } from '@xstate/react';
+import {  pomodoroMachine } from '@/stateMachines/timer';
+
+
 export default function Timer() {
-  let [timeLeft, setTimeLeft] = useState(25)
-  let [paused, setPaused] = useState(true)
-
-  let handlePause = (e) => {
-    e.preventDefault()
-    if (paused) {
-      setPaused(false)
-    } else {
-      setPaused(true)
-    }
-  }
-
-  let handleStart = (e) => {
-    e.preventDefault()
-    setTimeLeft(25)
-    setPaused(false)
-  }
-
-  useEffect(() => {
-    if (!paused) {
-      let id = setInterval(() => {
-        if (timeLeft > 0) {
-          setTimeLeft(timeLeft - 1)
-        }
-      }, 1000)
-      return () => clearInterval(id)
-    }
-  })
-  return (
-    <div className={timerClass}>
-      <h1 className={timerClass}>{timeLeft}:00</h1>
-      <Button
-        title={timeLeft === 25 ? 'Start' : 'Restart'}
-        onClick={handleStart}
-      />
-      {timeLeft < 25 ? (
-        <Button title="Pause/Resume" onClick={handlePause} />
-      ) : null}
-    </div>
-  )
+  const service = useInterpret(pomodoroMachine)
+  const [ state ] = useActor(service)
+  return (<div>
+    <h1>{(state.context.timerInner !== null) ? state.context.timerInner.state.context.showTimeLeft: ''}</h1>
+    <Button title="Start" onClick={() => service.send('START')}/>
+  </div>)
 }

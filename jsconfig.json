@@ -7,6 +7,7 @@
         "@/config/*" : ["config/*"],
         "@/fonts/*" : ["fonts/*"],
         "@/stateMachines/*" : ["stateMachines/*"],
+        "@/providers/*" : ["providers/*"],
       }
   }
 }
