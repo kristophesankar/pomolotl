@@ -1,11 +1,11 @@
-import { createMachine, send, assign, spawn } from 'xstate'
+import { createMachine, send, assign, spawn, sendParent } from 'xstate'
 
 const padTo2Digits = (num) => {
   return num.toString().padStart(2, '0')
 }
 
 const initContext = {
-  duration: 5,
+  duration: 15,
   current: 0,
   timeLeft: '',
   interval: 1,
@@ -42,7 +42,7 @@ const timer = (contextArg) => {
         PAUSE: 'paused',
         STOP: 'idle',
         TICK: {
-          actions: ['increment', 'updateTimeLeft', 'showTimeLeft'],
+          actions: ['increment', 'updateTimeLeft', 'showTimeLeft', 'updateParent',],
           cond: (context) => {
             return context.current < context.duration
           },
@@ -87,6 +87,10 @@ const timer = (contextArg) => {
       console.log(context.timeLeft)
       return context.timeLeft
     },
+    updateParent: sendParent((context, event) => ({
+      type: "UPDATE_TIME",
+      data: context.timeLeft,
+    })),
     resetCurrent: assign({
       current: 0,
     }),
@@ -132,9 +136,13 @@ const focus = {
       },
     ],
   },
+  exit: ['destroyTimer'],
   on: {
     START: {
       actions: ['spawnFocusTimer', 'sendStart'],
+    },
+    UPDATE_TIME: {
+      actions: ["updateTime"],
     },
   },
 }
@@ -147,9 +155,13 @@ const shortBreak = {
       target: 'focus',
     },
   },
+  exit: ['destroyTimer'],
   on: {
     START: {
       actions: ['spawnShortTimer', 'sendStart'],
+    },
+    UPDATE_TIME: {
+      actions: ["updateTime"],
     },
   },
 }
@@ -162,9 +174,13 @@ const longBreak = {
       target: 'focus',
     },
   },
+  exit: ['destroyTimer'],
   on: {
     START: {
       actions: ['spawnLongTimer', 'sendStart'],
+    },
+    UPDATE_TIME: {
+      actions: ["updateTime"],
     },
   },
 }
@@ -181,11 +197,18 @@ export const appConfiguration = {
   context: {
     timesRun: 0,
     timerInner: null,
+    currentTime: "25:00",
   },
   states: appStates,
 }
 
 export const appActions = {
+  destroyTimer: assign({
+    timerInner: null,
+  }),
+  updateTime: assign({
+    currentTime: (_, event) => event.data,
+  }),
   cleanupTimer: (context) => {
     context.timerInner.stop()
   },
