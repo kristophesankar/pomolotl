@@ -38,6 +38,12 @@ This chart maps the following states: idle, paused, running and completed
 - create a pixel perfect design of app - in progress
 - create screen flow for app usage - in progress
 
+# Installation
+
+```bash
+yarn install
+```
+
 # Running the development server
 
 ```bash
