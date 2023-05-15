@@ -5,7 +5,7 @@ const padTo2Digits = (num) => {
 }
 
 const initContext = {
-  duration: 15,
+  duration: 25,
   current: 0,
   timeLeft: '',
   interval: 1,
@@ -19,7 +19,7 @@ const shortBreakContext = {
 }
 
 const longBreakContext = {
-  duration: 10,
+  duration: 15,
   current: 0,
   timeLeft: '',
   interval: 1,
@@ -137,6 +137,9 @@ const focus = {
     ],
   },
   exit: ['destroyTimer'],
+  entry: [assign({
+    currentTime: (context) => "25:00"
+  })],
   on: {
     START: {
       actions: ['spawnFocusTimer', 'sendStart'],
@@ -156,6 +159,9 @@ const shortBreak = {
     },
   },
   exit: ['destroyTimer'],
+  entry: [assign({
+    currentTime: (context) => "05:00"
+  })],
   on: {
     START: {
       actions: ['spawnShortTimer', 'sendStart'],
@@ -175,6 +181,9 @@ const longBreak = {
     },
   },
   exit: ['destroyTimer'],
+  entry: [assign({
+    currentTime: (context) => "15:00"
+  })],
   on: {
     START: {
       actions: ['spawnLongTimer', 'sendStart'],
