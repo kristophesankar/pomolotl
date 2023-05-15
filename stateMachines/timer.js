@@ -4,22 +4,26 @@ const padTo2Digits = (num) => {
   return num.toString().padStart(2, '0')
 }
 
+let initFocusTime = '25:00'
+let initShortTime = '05:00'
+let initLongTime = '15:00'
+
 const initContext = {
-  duration: 25,
+  duration: 1500,
   current: 0,
   timeLeft: '',
   interval: 1,
 }
 
 const shortBreakContext = {
-  duration: 5,
+  duration: 300,
   current: 0,
   timeLeft: '',
   interval: 1,
 }
 
 const longBreakContext = {
-  duration: 15,
+  duration: 900,
   current: 0,
   timeLeft: '',
   interval: 1,
@@ -42,7 +46,12 @@ const timer = (contextArg) => {
         PAUSE: 'paused',
         STOP: 'idle',
         TICK: {
-          actions: ['increment', 'updateTimeLeft', 'showTimeLeft', 'updateParent',],
+          actions: [
+            'increment',
+            'updateTimeLeft',
+            'showTimeLeft',
+            'updateParent',
+          ],
           cond: (context) => {
             return context.current < context.duration
           },
@@ -88,7 +97,7 @@ const timer = (contextArg) => {
       return context.timeLeft
     },
     updateParent: sendParent((context, event) => ({
-      type: "UPDATE_TIME",
+      type: 'UPDATE_TIME',
       data: context.timeLeft,
     })),
     resetCurrent: assign({
@@ -137,15 +146,31 @@ const focus = {
     ],
   },
   exit: ['destroyTimer'],
-  entry: [assign({
-    currentTime: (context) => "25:00"
-  })],
+  entry: [
+    assign({
+      currentTime: (context) => initFocusTime,
+    }),
+  ],
   on: {
     START: {
       actions: ['spawnFocusTimer', 'sendStart'],
     },
+    STOP: {
+      actions: [
+        'sendStop',
+        assign({
+          currentTime: (context) => initFocusTime,
+        }),
+      ],
+    },
     UPDATE_TIME: {
-      actions: ["updateTime"],
+      actions: ['updateTime'],
+    },
+    PAUSE: {
+      actions: ['sendPause'],
+    },
+    CONTINUE: {
+      actions: ['sendContinue'],
     },
   },
 }
@@ -159,15 +184,31 @@ const shortBreak = {
     },
   },
   exit: ['destroyTimer'],
-  entry: [assign({
-    currentTime: (context) => "05:00"
-  })],
+  entry: [
+    assign({
+      currentTime: (_) => initShortTime,
+    }),
+  ],
   on: {
     START: {
       actions: ['spawnShortTimer', 'sendStart'],
     },
+    STOP: {
+      actions: [
+        'sendStop',
+        assign({
+          currentTime: (_) => initShortTime,
+        }),
+      ],
+    },
     UPDATE_TIME: {
-      actions: ["updateTime"],
+      actions: ['updateTime'],
+    },
+    PAUSE: {
+      actions: ['sendPause'],
+    },
+    CONTINUE: {
+      actions: ['sendContinue'],
     },
   },
 }
@@ -181,15 +222,31 @@ const longBreak = {
     },
   },
   exit: ['destroyTimer'],
-  entry: [assign({
-    currentTime: (context) => "15:00"
-  })],
+  entry: [
+    assign({
+      currentTime: (_) => initLongTime,
+    }),
+  ],
   on: {
     START: {
       actions: ['spawnLongTimer', 'sendStart'],
     },
+    STOP: {
+      actions: [
+        'sendStop',
+        assign({
+          currentTime: (_) => initLongTime,
+        }),
+      ],
+    },
     UPDATE_TIME: {
-      actions: ["updateTime"],
+      actions: ['updateTime'],
+    },
+    PAUSE: {
+      actions: ['sendPause'],
+    },
+    CONTINUE: {
+      actions: ['sendContinue'],
     },
   },
 }
@@ -206,9 +263,10 @@ export const appConfiguration = {
   context: {
     timesRun: 0,
     timerInner: null,
-    currentTime: "25:00",
+    currentTime: initFocusTime,
   },
   states: appStates,
+  predictableActionArguments: true,
 }
 
 export const appActions = {
@@ -229,17 +287,17 @@ export const appActions = {
   }),
   spawnFocusTimer: assign({
     timerInner: (context, event) => {
-      return spawn(timer(initContext), 'timerInner')
+      return spawn(timer(initContext), { name: 'timerInner', sync: true })
     },
   }),
   spawnShortTimer: assign({
     timerInner: () => {
-      return spawn(timer(shortBreakContext), 'timerInner')
+      return spawn(timer(shortBreakContext), { name: 'timerInner', sync: true })
     },
   }),
   spawnLongTimer: assign({
     timerInner: () => {
-      return spawn(timer(longBreakContext), 'timerInner')
+      return spawn(timer(longBreakContext), { name: 'timerInner', sync: true })
     },
   }),
   sendStart: send(
@@ -250,6 +308,18 @@ export const appActions = {
   ),
   sendStop: send(
     { type: 'STOP' },
+    {
+      to: (context) => context.timerInner,
+    }
+  ),
+  sendPause: send(
+    { type: 'PAUSE' },
+    {
+      to: (context) => context.timerInner,
+    }
+  ),
+  sendContinue: send(
+    { type: 'CONTINUE' },
     {
       to: (context) => context.timerInner,
     }

@@ -1,41 +1,30 @@
-import { timerNav, btnOutline, btn } from '@/styles/Index.module.sass'
 import Button from '@/components/Button'
 import { useActor } from '@xstate/react'
 import { useContext } from 'react'
 import { GlobalStateContext } from '@/providers/globalState'
+import TimerNav from '@/components/TimerNav'
 
 export default function Timer() {
   const { service } = useContext(GlobalStateContext)
-  const [state] = useActor(service)
-
-  const stateNames = {
-    focus: 'Focus',
-    shortBreak: 'Short Break',
-    longBreak: 'Long Break',
+  const [state, send] = useActor(service)
+  const { currentTime } = state.context
+  const { timerInner } = state.children
+  const interValState = timerInner.getSnapshot() !== undefined ? timerInner.getSnapshot().value : undefined
+  if (interValState !== undefined) {
+    console.log(interValState)
   }
-
   return (
     <div>
-      <div className={timerNav}>
-        {Object.values(stateNames).map((e) => {
-          const name = e.replace(/s/g, '')
-          const key = `key-${name}`
-          return (
-            <span
-              key={key}
-              className={stateNames[state.value] === e ? btn : btnOutline}
-            >
-              {e}
-            </span>
-          )
-        })}
-      </div>
-      <h1>{state.context.currentTime}</h1>
-      {state.context.timerInner === null ? (
-        <Button title="Start" onClick={() => service.send('START')} />
-      ) : (
-        ''
-      )}
+      <TimerNav />
+      <h1>{currentTime}</h1>
+      {
+        {
+          undefined: <Button title="Start" onClick={() => send('START')} />,
+          'idle': <Button title="Start" onClick={() => send('START')} />,
+          'running': <><Button title="Pause" onClick={() => send('PAUSE')} /> <Button title="Stop" onClick={() => send('STOP')}/> </>,
+          'paused': <><Button title="Continue" onClick={() => send('CONTINUE')} /> <Button title="Restart" onClick={() => send('START')} /><Button title="Stop" onClick={() => send('STOP')}/> </>,
+        }[interValState]
+      }
     </div>
   )
 }
