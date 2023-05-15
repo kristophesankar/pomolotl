@@ -5,10 +5,9 @@ import { pomodoroMachine } from '@/stateMachines/timer';
 export const GlobalStateContext = createContext({});
 
 export const GlobalStateProvider = (props) => {
-  const pomodoroService = useInterpret(pomodoroMachine);
-
+  const service = useInterpret(pomodoroMachine);
   return (
-    <GlobalStateContext.Provider value={{ pomodoroService }}>
+    <GlobalStateContext.Provider value={{ service }}>
       {props.children}
     </GlobalStateContext.Provider>
   );
