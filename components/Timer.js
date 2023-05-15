@@ -18,7 +18,9 @@ export default function Timer() {
     <div>
       <div className={timerNav}>
         {Object.values(stateNames).map((e) => {
-          return <span className={(stateNames[state.value] === e) ? btn : btnOutline}>{e}</span>
+          const name = e.replace(/s/g, '')
+          const key = `key-${name}`
+          return <span key={key} className={(stateNames[state.value] === e) ? btn : btnOutline}>{e}</span>
         })}
       </div>
       <h1>{state.context.currentTime}</h1>
