@@ -107,10 +107,13 @@ const timer = (contextArg) => {
 
   const services = {
     timerService: (context) => (callback) => {
-      let id = setInterval(() => {
-        callback('TICK')
-      }, 1000 * context.interval)
-      return () => clearInterval(id)
+      const intervalWorker = new Worker(new URL('./intervalWorker.js', import.meta.url))
+      intervalWorker.postMessage('start')
+      intervalWorker.onmessage = (event) => {
+        callback('TICK');
+        console.log(`Received message from worker: ${event.data}`);
+      };
+      return () => intervalWorker.postMessage('stop');
     },
   }
 
