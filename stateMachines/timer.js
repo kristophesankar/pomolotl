@@ -10,23 +10,29 @@ let initLongTime = '15:00'
 
 const initContext = {
   duration: 1500,
+  durationMS: 1500000,
   current: 0,
   timeLeft: '',
   interval: 1,
+  timeEnd: null,
 }
 
 const shortBreakContext = {
   duration: 300,
+  durationMS: 300000,
   current: 0,
   timeLeft: '',
   interval: 1,
+  timeEnd: null,
 }
 
 const longBreakContext = {
   duration: 900,
+  durationMS: 900000,
   current: 0,
   timeLeft: '',
   interval: 1,
+  timeEnd: null,
 }
 
 const timer = (contextArg) => {
@@ -34,10 +40,13 @@ const timer = (contextArg) => {
     idle: {
       entry: ['resetCurrent'],
       on: {
-        START: 'running',
+        START: {
+          target: 'running',
+        },
       },
     },
     running: {
+      entry: ['setEndTime'],
       invoke: {
         id: 'intervalService',
         src: 'timerService',
@@ -78,22 +87,28 @@ const timer = (contextArg) => {
   }
 
   const actions = {
+    setEndTime: assign({
+      // set the time end to the 25 mins plus the current
+      timeEnd: (context) => Date.now() + context.durationMS
+    }),
     increment: assign({
       current: (context) => context.current + context.interval,
     }),
     updateTimeLeft: assign({
       timeLeft: (context) => {
+        const timeDiff = context.timeEnd - Date.now();
+        console.log(new Date(timeDiff).toISOString().slice(14, 19)); // 👉️ 15:00:00
+        const fmtTime = new Date(timeDiff).toISOString().slice(14, 19);
         const diff = context.duration - context.current
         const minutes = Math.floor(diff / 60)
         const seconds = diff % 60
         const formattedTime = `${padTo2Digits(minutes)}:${padTo2Digits(
           seconds
         )}`
-        return formattedTime
+        return fmtTime;
       },
     }),
     showTimeLeft: (context) => {
-      console.log(context.timeLeft)
       return context.timeLeft
     },
     updateParent: sendParent((context, event) => ({
@@ -107,13 +122,14 @@ const timer = (contextArg) => {
 
   const services = {
     timerService: (context) => (callback) => {
-      const intervalWorker = new Worker(new URL('./intervalWorker.js', import.meta.url))
+      const intervalWorker = new Worker(
+        new URL('./intervalWorker.js', import.meta.url)
+      )
       intervalWorker.postMessage('start')
       intervalWorker.onmessage = (event) => {
-        callback('TICK');
-        console.log(`Received message from worker: ${event.data}`);
-      };
-      return () => intervalWorker.postMessage('stop');
+        callback('TICK')
+      }
+      return () => intervalWorker.postMessage('stop')
     },
   }
 
