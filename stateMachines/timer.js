@@ -10,7 +10,7 @@ let initLongTime = '15:00'
 
 const initContext = {
   duration: 1500,
-  durationMS: 1500000,
+  durationMS: 150000,
   current: 0,
   timeLeft: '',
   interval: 1,
@@ -41,7 +41,7 @@ const longBreakContext = {
 const timer = (contextArg) => {
   const timerLogicState = {
     idle: {
-      entry: ['resetCurrent', 'initEndTime'],
+      entry: ['resetCurrent', 'initEndTime', 'initPausedTime'],
       on: {
         START: {
           target: 'running',
@@ -64,7 +64,7 @@ const timer = (contextArg) => {
             'updateParent',
           ],
           cond: (context) => {
-            return context.current < context.duration
+            return context.current < context.timeEnd
           },
         },
       },
@@ -72,7 +72,7 @@ const timer = (contextArg) => {
         {
           target: 'completed',
           cond: (context) => {
-            return context.current >= context.duration
+            return context.current >= context.timeEnd
           },
         },
       ],
@@ -94,29 +94,24 @@ const timer = (contextArg) => {
 
   const actions = {
     initEndTime: assign({
-      // set the time end to the 25 mins plus the current
       timeEnd: (context) => Date.now() + context.durationMS
+    }),
+    initPausedTime: assign({
+      paused: (_) => 0
     }),
     updateEndTime: assign({
       timeEnd: (context) => Date.now() + (context.timeEnd - context.pausedTime)
     }),
     updatePausedTime: assign({
-      pausedTime: (context) => Date.now()
+      pausedTime: (_) => Date.now()
     }),
     increment: assign({
-      current: (context) => context.current + context.interval,
+      current: (context) => Date.now()
     }),
     updateTimeLeft: assign({
       timeLeft: (context) => {
         const timeDiff = context.timeEnd - Date.now();
         const fmtTime = new Date(timeDiff).toISOString().slice(14, 19);
-
-        const diff = context.duration - context.current
-        const minutes = Math.floor(diff / 60)
-        const seconds = diff % 60
-        const formattedTime = `${padTo2Digits(minutes)}:${padTo2Digits(
-          seconds
-        )}`
         return fmtTime;
       },
     }),
