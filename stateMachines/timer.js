@@ -10,7 +10,7 @@ let initLongTime = '15:00'
 
 const initContext = {
   duration: 1500,
-  durationMS: 150000,
+  durationMS: 1500000,
   current: 0,
   timeLeft: '',
   interval: 1,
