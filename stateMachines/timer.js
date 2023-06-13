@@ -10,7 +10,7 @@ let initLongTime = '15:00'
 
 const initContext = {
   duration: 1500,
-  durationMS: 1500000,
+  durationMS: 1501000,
   current: 0,
   timeLeft: '',
   interval: 1,
@@ -20,7 +20,7 @@ const initContext = {
 
 const shortBreakContext = {
   duration: 300,
-  durationMS: 300000,
+  durationMS: 301000,
   current: 0,
   timeLeft: '',
   interval: 1,
@@ -30,7 +30,7 @@ const shortBreakContext = {
 
 const longBreakContext = {
   duration: 900,
-  durationMS: 900000,
+  durationMS: 901000,
   current: 0,
   timeLeft: '',
   interval: 1,
