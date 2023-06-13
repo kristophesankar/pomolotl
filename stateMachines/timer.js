@@ -14,7 +14,8 @@ const initContext = {
   current: 0,
   timeLeft: '',
   interval: 1,
-  timeEnd: null,
+  timeEnd: 0,
+  pausedTime: 0,
 }
 
 const shortBreakContext = {
@@ -23,7 +24,8 @@ const shortBreakContext = {
   current: 0,
   timeLeft: '',
   interval: 1,
-  timeEnd: null,
+  timeEnd: 0,
+  pausedTime: 0,
 }
 
 const longBreakContext = {
@@ -32,13 +34,14 @@ const longBreakContext = {
   current: 0,
   timeLeft: '',
   interval: 1,
-  timeEnd: null,
+  timeEnd: 0,
+  pausedTime: 0,
 }
 
 const timer = (contextArg) => {
   const timerLogicState = {
     idle: {
-      entry: ['resetCurrent'],
+      entry: ['resetCurrent', 'initEndTime'],
       on: {
         START: {
           target: 'running',
@@ -46,7 +49,6 @@ const timer = (contextArg) => {
       },
     },
     running: {
-      entry: ['setEndTime'],
       invoke: {
         id: 'intervalService',
         src: 'timerService',
@@ -79,17 +81,27 @@ const timer = (contextArg) => {
       type: 'final',
     },
     paused: {
+      entry: ['updatePausedTime'],
       on: {
         STOP: 'idle',
-        CONTINUE: 'running',
+        CONTINUE: {
+          target: 'running',
+          actions: ['updateEndTime'],
+        }
       },
     },
   }
 
   const actions = {
-    setEndTime: assign({
+    initEndTime: assign({
       // set the time end to the 25 mins plus the current
       timeEnd: (context) => Date.now() + context.durationMS
+    }),
+    updateEndTime: assign({
+      timeEnd: (context) => Date.now() + (context.timeEnd - context.pausedTime)
+    }),
+    updatePausedTime: assign({
+      pausedTime: (context) => Date.now()
     }),
     increment: assign({
       current: (context) => context.current + context.interval,
@@ -97,8 +109,8 @@ const timer = (contextArg) => {
     updateTimeLeft: assign({
       timeLeft: (context) => {
         const timeDiff = context.timeEnd - Date.now();
-        console.log(new Date(timeDiff).toISOString().slice(14, 19)); // 👉️ 15:00:00
         const fmtTime = new Date(timeDiff).toISOString().slice(14, 19);
+
         const diff = context.duration - context.current
         const minutes = Math.floor(diff / 60)
         const seconds = diff % 60
@@ -122,14 +134,10 @@ const timer = (contextArg) => {
 
   const services = {
     timerService: (context) => (callback) => {
-      const intervalWorker = new Worker(
-        new URL('./intervalWorker.js', import.meta.url)
-      )
-      intervalWorker.postMessage('start')
-      intervalWorker.onmessage = (event) => {
+      let id = setInterval(() => {
         callback('TICK')
-      }
-      return () => intervalWorker.postMessage('stop')
+      }, 1000 * context.interval)
+      return () => clearInterval(id)
     },
   }
 
