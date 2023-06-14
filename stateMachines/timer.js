@@ -1,16 +1,12 @@
 import { createMachine, send, assign, spawn, sendParent } from 'xstate'
 
-const padTo2Digits = (num) => {
-  return num.toString().padStart(2, '0')
-}
-
 let initFocusTime = '25:00'
 let initShortTime = '05:00'
 let initLongTime = '15:00'
 
 const initContext = {
   duration: 1500,
-  durationMS: 1501000,
+  durationMS: 1502000,
   current: 0,
   timeLeft: '',
   interval: 1,
@@ -20,7 +16,7 @@ const initContext = {
 
 const shortBreakContext = {
   duration: 300,
-  durationMS: 301000,
+  durationMS: 302000,
   current: 0,
   timeLeft: '',
   interval: 1,
@@ -30,7 +26,7 @@ const shortBreakContext = {
 
 const longBreakContext = {
   duration: 900,
-  durationMS: 901000,
+  durationMS: 90200,
   current: 0,
   timeLeft: '',
   interval: 1,
@@ -106,7 +102,7 @@ const timer = (contextArg) => {
       pausedTime: (_) => Date.now()
     }),
     increment: assign({
-      current: (context) => Date.now()
+      current: (_) => Date.now()
     }),
     updateTimeLeft: assign({
       timeLeft: (context) => {
@@ -118,7 +114,7 @@ const timer = (contextArg) => {
     showTimeLeft: (context) => {
       return context.timeLeft
     },
-    updateParent: sendParent((context, event) => ({
+    updateParent: sendParent((context, _) => ({
       type: 'UPDATE_TIME',
       data: context.timeLeft,
     })),
@@ -150,6 +146,20 @@ const timer = (contextArg) => {
 }
 
 // app states
+const reusableEvents = {
+    UPDATE_TIME: {
+      actions: ['updateTime'],
+    },
+    PAUSE: {
+      actions: ['sendPause'],
+    },
+    CONTINUE: {
+      actions: ['sendContinue'],
+    },
+    FOCUS: 'focus',
+    SHORT: 'shortBreak',
+    LONG: 'longBreak',
+}
 
 const focus = {
   invoke: {
@@ -170,7 +180,7 @@ const focus = {
   exit: ['destroyTimer'],
   entry: [
     assign({
-      currentTime: (context) => initFocusTime,
+      currentTime: (_) => initFocusTime,
     }),
   ],
   on: {
@@ -181,19 +191,11 @@ const focus = {
       actions: [
         'sendStop',
         assign({
-          currentTime: (context) => initFocusTime,
+          currentTime: (_) => initFocusTime,
         }),
       ],
     },
-    UPDATE_TIME: {
-      actions: ['updateTime'],
-    },
-    PAUSE: {
-      actions: ['sendPause'],
-    },
-    CONTINUE: {
-      actions: ['sendContinue'],
-    },
+    ...reusableEvents,
   },
 }
 
@@ -223,15 +225,7 @@ const shortBreak = {
         }),
       ],
     },
-    UPDATE_TIME: {
-      actions: ['updateTime'],
-    },
-    PAUSE: {
-      actions: ['sendPause'],
-    },
-    CONTINUE: {
-      actions: ['sendContinue'],
-    },
+    ...reusableEvents,
   },
 }
 
@@ -261,15 +255,7 @@ const longBreak = {
         }),
       ],
     },
-    UPDATE_TIME: {
-      actions: ['updateTime'],
-    },
-    PAUSE: {
-      actions: ['sendPause'],
-    },
-    CONTINUE: {
-      actions: ['sendContinue'],
-    },
+    ...reusableEvents,
   },
 }
 
