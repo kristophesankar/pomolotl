@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 import { useInterpret } from '@xstate/react';
-import { pomodoroMachine } from '@/stateMachines/timer';
+import { pomodoroMachine } from '@/stateMachines/pomodoroMachine';
 
 export const GlobalStateContext = createContext({});
 
