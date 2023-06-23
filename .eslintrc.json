@@ -1,3 +1,15 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "next",
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:cypress/recommended",
+    "plugin:react/recommended",
+    "plugin:react/jsx-runtime",
+    //"plugin:react-hooks/recommended",
+    "prettier"
+  ],
+  "rules": {
+    "react/prop-types": 0
+  }
 }
