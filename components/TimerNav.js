@@ -8,11 +8,11 @@ export default function TimerNav() {
   const { service } = useContext(GlobalStateContext)
   const [state, send] = useActor(service)
 
-  const stateNames ={
-    0: {target: 'focus', event: 'FOCUS', name: 'Focus'},
-    1: {target: 'shortBreak', event: 'SHORT', name: 'Short Break'},
-    2: {target: 'longBreak', event: 'LONG', name: 'Long Break'}
-  };
+  const stateNames = {
+    0: { target: 'focus', event: 'FOCUS', name: 'Focus' },
+    1: { target: 'shortBreak', event: 'SHORT', name: 'Short Break' },
+    2: { target: 'longBreak', event: 'LONG', name: 'Long Break' },
+  }
 
   return (
     <div className={timerNav}>
