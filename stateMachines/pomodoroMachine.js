@@ -1,12 +1,20 @@
-import { createMachine, send, assign, spawn, sendParent } from 'xstate'
+import { createMachine, send, assign, spawn } from 'xstate'
 import { timer } from '@/stateMachines/timerMachine'
 
-let initFocusTime = '25:00'
-let initShortTime = '05:00'
-let initLongTime = '15:00'
+const msToMins = (time) => {
+  return new Date(time).toISOString().slice(14, 19)
+}
+
+const focusMs = 1500000
+const shortMs = 300000
+const longMs = 900000
+
+const initFocusTime = msToMins(focusMs)
+const initShortTime = msToMins(shortMs)
+const initLongTime = msToMins(longMs)
 
 const initContext = {
-  duration: 1502000,
+  duration: focusMs + 1000,
   current: 0,
   timeLeft: '',
   timeEnd: 0,
@@ -14,7 +22,7 @@ const initContext = {
 }
 
 const shortBreakContext = {
-  duration: 302000,
+  duration: shortMs + 1000,
   current: 0,
   timeLeft: '',
   timeEnd: 0,
@@ -22,7 +30,7 @@ const shortBreakContext = {
 }
 
 const longBreakContext = {
-  duration: 902000,
+  duration: longMs + 1000,
   current: 0,
   timeLeft: '',
   timeEnd: 0,
