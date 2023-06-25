@@ -1,5 +1,5 @@
 import { createMachine, send, assign, spawn, sendParent } from 'xstate'
-import {timer} from '@/stateMachines/timerMachine';
+import { timer } from '@/stateMachines/timerMachine'
 
 let initFocusTime = '25:00'
 let initShortTime = '05:00'
@@ -22,7 +22,7 @@ const shortBreakContext = {
 }
 
 const longBreakContext = {
-  duration: 90200,
+  duration: 902000,
   current: 0,
   timeLeft: '',
   timeEnd: 0,
@@ -30,19 +30,21 @@ const longBreakContext = {
 }
 
 const reusableEvents = {
-    UPDATE_TIME: {
-      actions: ['updateTime'],
-    },
-    PAUSE: {
-      actions: ['sendPause'],
-    },
-    CONTINUE: {
-      actions: ['sendContinue'],
-    },
-    FOCUS: 'focus',
-    SHORT: 'shortBreak',
-    LONG: 'longBreak',
+  UPDATE_TIME: {
+    actions: ['updateTime'],
+  },
+  PAUSE: {
+    actions: ['sendPause'],
+  },
+  CONTINUE: {
+    actions: ['sendContinue'],
+  },
+  FOCUS: 'focus',
+  SHORT: 'shortBreak',
+  LONG: 'longBreak',
 }
+
+let onDoneActions = ['playTimerDoneSound']
 
 // app states
 
@@ -53,7 +55,7 @@ const focus = {
     onDone: [
       {
         target: 'shortBreak',
-        actions: ['updateTimesRun'],
+        actions: [...onDoneActions, 'updateTimesRun'],
         cond: (context) => context.timesRun < 3,
       },
       {
@@ -90,6 +92,7 @@ const shortBreak = {
     src: (context) => context.timerInner,
     onDone: {
       target: 'focus',
+      actions: onDoneActions,
     },
   },
   exit: ['destroyTimer'],
@@ -120,6 +123,7 @@ const longBreak = {
     src: (context) => context.timerInner,
     onDone: {
       target: 'focus',
+      actions: onDoneActions,
     },
   },
   exit: ['destroyTimer'],
@@ -163,6 +167,10 @@ export const appConfiguration = {
 }
 
 export const appActions = {
+  playTimerDoneSound: () => {
+    const audio = new Audio('../assets/sounds/timer-done.mp3')
+    audio.play()
+  },
   destroyTimer: assign({
     timerInner: null,
   }),
