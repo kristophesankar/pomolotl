@@ -1,5 +1,8 @@
 import { createMachine, send, assign, spawn } from 'xstate'
 import { timer } from '@/stateMachines/timerMachine'
+import alarmAudioFile from '../assets/sounds/alarm.mp3'
+const sound =
+  typeof Audio !== 'undefined' ? new Audio(alarmAudioFile) : undefined
 
 const msToMins = (time) => {
   return new Date(time).toISOString().slice(14, 19)
@@ -77,6 +80,7 @@ const focus = {
     assign({
       currentTime: (_) => initFocusTime,
     }),
+    'initTimerSound',
   ],
   on: {
     START: {
@@ -175,9 +179,13 @@ export const appConfiguration = {
 }
 
 export const appActions = {
+  initTimerSound: () => {
+    sound.muted = true
+    sound.play()
+  },
   playTimerDoneSound: () => {
-    const audio = new Audio('../assets/sounds/timer-done.mp3')
-    audio.play()
+    sound.muted = false
+    sound.play()
   },
   destroyTimer: assign({
     timerInner: null,

@@ -1,4 +1,6 @@
 import { createMachine, assign, sendParent } from 'xstate'
+import dynamic from 'next/dynamic';
+const HackTimer = dynamic(() => import('hacktimer'), { ssr: false });
 
 export const timer = (contextArg) => {
   const timerLogicState = {
