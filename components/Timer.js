@@ -17,7 +17,7 @@ export default function Timer() {
   return (
     <div>
       <TimerNav />
-      <div class={timerText}>{currentTime}</div>
+      <div className={timerText}>{currentTime}</div>
       {
         {
           undefined: <Button title="Start" onClick={() => send('START')} />,
