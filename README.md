@@ -1,4 +1,4 @@
-# ⏱️ DoroTimer
+#![dorotimer-logo](https://github.com/kristophesankar/dorotimer/assets/33190221/9298246a-bfdc-44f2-b122-75abf94c1652) Axotimer
 #  Introduction
 (This is in active development) A pomodoro timer web app built with Next js and XSTATE!
 
