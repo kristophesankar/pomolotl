@@ -15,13 +15,35 @@
   justify-content: center
   padding: $global-padding
 
+.headerFlex
+  display: flex
+  padding: $global-padding
+  align-items: center
+
 .header
   display: flex
-  flex-direction: column
+  flex-direction: row
   align-items: center
+  width: 100vw
+
+.iconDefault
+  color: $red
+  font-size: 2rem
 
 .sitename
   margin-top: 0rem
+  font-size: 2rem
+  font-family: 'Metropolis-Bold', sans-serif
+  color: $red
+
+.logo
+  transform: rotate(-25deg)
+
+.settingsBtn
+  all: unset
+
+.settingsBtn:hover
+  cursor: pointer
 
 .timerText
   font-size: 5rem
@@ -36,6 +58,7 @@
   width: fit-content
   background: $dark-blue
   border-radius: calc($global-radius * 2)
+  box-shadow: 0px 1px 15px 0px rgba(0,0,0,0.75)
 
 .timerNav
   display: flex
@@ -50,6 +73,7 @@
   color: white
   border-radius: $global-radius
   padding: $btn-padding
+  cursor: pointer
 
 .btnOutline
   border: 1px solid $cyan
@@ -58,6 +82,8 @@
   color: $cyan
   border-radius: $global-radius
   padding: $btn-padding
+  cursor: pointer
+
 
 .timer
   padding: $global-padding
