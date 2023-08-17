@@ -3,6 +3,7 @@ import { useActor } from '@xstate/react'
 import { useContext } from 'react'
 import { GlobalStateContext } from '@/providers/globalState'
 import TimerNav from '@/components/TimerNav'
+import { timerText } from '../styles/Index.module.sass'
 
 export default function Timer() {
   const { service } = useContext(GlobalStateContext)
@@ -16,7 +17,7 @@ export default function Timer() {
   return (
     <div>
       <TimerNav />
-      <h1>{currentTime}</h1>
+      <div class={timerText}>{currentTime}</div>
       {
         {
           undefined: <Button title="Start" onClick={() => send('START')} />,
