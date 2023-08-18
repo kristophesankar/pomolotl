@@ -1,4 +1,4 @@
-import { item, help, footer } from '../styles/Index.module.sass'
+import { item, help } from '../styles/Index.module.sass'
 
 export default function Help() {
   return (
@@ -6,11 +6,11 @@ export default function Help() {
       <div className={help}>
         <h3>How to use this app.</h3>
         <p>
-          Press the "Focus" button followed by start to enter a focus sprint. At
+          Press the "quot;Focus"quot; button followed by start to enter a focus sprint. At
           the end of the timer a sound will indicate this sprint is over and
           will automatically move to the next logical state. In this
-          implimentation a "Short Break" follows the completition of the "Focus"
-          state three times before finally entering a "Long Break" state. The
+          implimentation a "quot;Short Break"quot; follows the completition of the "quot;Focus"quot;
+          state three times before finally entering a "quot;Long Break"quot; state. The
           pattern is then repeated.
         </p>
         <h3>What does pomolotl mean?</h3>
@@ -20,7 +20,7 @@ export default function Help() {
         <p>
           Pomodoro is a time management technique developed by Francesco Cirillo
           in the late 1980s. The technique involves breaking work into focused
-          intervals of 25 minutes, called "Pomodoros," separated by short breaks
+          intervals of 25 minutes, called "quot;Pomodoros,"quot; separated by short breaks
           of 5-10 minutes. After four Pomodoros, a longer break of 15-30 minutes
         </p>
         <p>
@@ -30,7 +30,7 @@ export default function Help() {
           regular breaks to rest and recharge.
         </p>
         <p>
-          The name "Pomodoro" comes from the Italian word for tomato, which is
+          The name "quot;Pomodoro"quot; comes from the Italian word for tomato, which is
           what Cirillo used as a timer when he first developed the technique.
           Today, there are many digital Pomodoro timers available, making it
           easy to implement the technique in your work routine.
