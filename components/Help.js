@@ -6,11 +6,12 @@ export default function Help() {
       <div className={help}>
         <h3>How to use this app.</h3>
         <p>
-          Press the "Focus" button followed by start to enter a focus sprint. At the end
-          of the timer a sound will indicate this sprint is over and will
-          automatically move to the next logical state. In this implimentation a
-          "Short Break" follows the completition of the "Focus" state three times
-          before finally entering a "Long Break" state. The pattern is then repeated.
+          Press the "Focus" button followed by start to enter a focus sprint. At
+          the end of the timer a sound will indicate this sprint is over and
+          will automatically move to the next logical state. In this
+          implimentation a "Short Break" follows the completition of the "Focus"
+          state three times before finally entering a "Long Break" state. The
+          pattern is then repeated.
         </p>
         <h3>What does pomolotl mean?</h3>
         <p>Pomolotl is just a combination of two words. Pomodoro & Axolotl.</p>
@@ -34,7 +35,6 @@ export default function Help() {
           Today, there are many digital Pomodoro timers available, making it
           easy to implement the technique in your work routine.
         </p>
-
       </div>
     </div>
   )

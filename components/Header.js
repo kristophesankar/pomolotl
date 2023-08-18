@@ -1,4 +1,4 @@
-import {createContext, useSate, useContext} from 'react'
+import { createContext, useSate, useContext } from 'react'
 import {
   headerFlex,
   header,
@@ -11,9 +11,11 @@ import { IoIosHelpCircle } from 'react-icons/io'
 import { PageContext } from '@/providers/helpProvider'
 import Image from 'next/image'
 export default function Header() {
-  const {page, setPage} = useContext(PageContext)
-  const newVal = (page === 'timer') ? 'help' : 'timer'
-  const changeHandler = () => {setPage(newVal)}
+  const { page, setPage } = useContext(PageContext)
+  const newVal = page === 'timer' ? 'help' : 'timer'
+  const changeHandler = () => {
+    setPage(newVal)
+  }
 
   return (
     <div className={headerFlex}>

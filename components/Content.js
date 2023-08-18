@@ -5,5 +5,15 @@ import Card from '@/components/Card'
 import Help from '@/components/Help'
 export default function Content() {
   const { page } = useContext(PageContext)
-  return <div className={item}>{page == 'timer' ? <div className="fade"><Card /></div> : <Help />}</div>
+  return (
+    <div className={item}>
+      {page == 'timer' ? (
+        <div className="fade">
+          <Card />
+        </div>
+      ) : (
+        <Help />
+      )}
+    </div>
+  )
 }
