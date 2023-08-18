@@ -1,3 +1,4 @@
+import {createContext, useSate, useContext} from 'react'
 import {
   headerFlex,
   header,
@@ -6,9 +7,14 @@ import {
   iconDefault,
   settingsBtn,
 } from '../styles/Index.module.sass'
-import { IoIosSettings } from 'react-icons/io'
+import { IoIosHelpCircle } from 'react-icons/io'
+import { PageContext } from '@/providers/helpProvider'
 import Image from 'next/image'
 export default function Header() {
+  const {page, setPage} = useContext(PageContext)
+  const newVal = (page === 'timer') ? 'help' : 'timer'
+  const changeHandler = () => {setPage(newVal)}
+
   return (
     <div className={headerFlex}>
       <div className={header}>
@@ -24,7 +30,7 @@ export default function Header() {
       </div>
       <div>
         <button className={settingsBtn}>
-          <IoIosSettings className={iconDefault} />
+          <IoIosHelpCircle onClick={changeHandler} className={iconDefault} />
         </button>
       </div>
     </div>

@@ -1,8 +1,14 @@
-import { timerNav, btn, btnOutline } from '@/styles/Index.module.sass'
+import {
+  timerNav,
+  btn,
+  btnOutline,
+  iconDefault,
+} from '@/styles/Index.module.sass'
 import Button from '@/components/Button'
 import { useActor } from '@xstate/react'
 import { useContext } from 'react'
 import { GlobalStateContext } from '@/providers/globalState'
+import { IoIosSettings } from 'react-icons/io'
 
 export default function TimerNav() {
   const { service } = useContext(GlobalStateContext)
@@ -27,6 +33,7 @@ export default function TimerNav() {
           />
         )
       })}
+      <IoIosSettings className={iconDefault} />
     </div>
   )
 }

@@ -80,11 +80,10 @@ const focus = {
     assign({
       currentTime: (_) => initFocusTime,
     }),
-    'initTimerSound',
   ],
   on: {
     START: {
-      actions: ['spawnFocusTimer', 'sendStart'],
+      actions: ['spawnFocusTimer', 'sendStart', 'initTimerSound' ],
     },
     STOP: {
       actions: [
