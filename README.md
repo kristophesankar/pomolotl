@@ -2,7 +2,8 @@
 <p align="center">
   <img src="https://github.com/kristophesankar/dorotimer/assets/33190221/9298246a-bfdc-44f2-b122-75abf94c1652" alt="Sublime's custom image"/>
 </p>
-[![Netlify Status](https://api.netlify.com/api/v1/badges/48f52270-bed0-4624-a595-9315f9d6fd3a/deploy-status)](https://app.netlify.com/sites/doro-timer/deploys)
+
+
 # PomoLotl
 Pomodoro - Axolotl. A pomodoro timer application built with NextJS and XSTATE.
 
@@ -51,3 +52,4 @@ Running the following command brings up the Cypress Launchpad.
 yarn runt cypress open 
 ```
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/48f52270-bed0-4624-a595-9315f9d6fd3a/deploy-status)](https://app.netlify.com/sites/doro-timer/deploys)
