@@ -4,8 +4,8 @@
 </p>
 
 # PomoLotl
-#  Introduction
-(This is in active development) A pomodoro timer web app built with Next js and XSTATE!
+Pomodoro - Axolotl. A pomodoro timer application built with NextJS and XSTATE.
+
 
 # Background / Motivation
 Pomodoro is a time management technique developed by Francesco Cirillo in the late 1980s. The technique involves breaking work into focused intervals of 25 minutes, called "Pomodoros," separated by short breaks of 5-10 minutes. After four Pomodoros, a longer break of 15-30 minutes is taken.
@@ -28,31 +28,26 @@ This chart maps the following states: focus, shortBreak and longBreak
 This chart maps the following states: idle, paused, running and completed
 ![state_chart_2](https://user-images.githubusercontent.com/33190221/235472190-231cc4f8-8bb9-4094-8d67-c71edfe94e24.png)
 
-# Latest Updates
-- The main state machine has been modeled with xstate.
-- Work out state diagram for a pomodoro cycle.
-- Basic prototype working in react.
+# Getting Started
 
-# TODO
-### Coding
-- integrate the xstate state machine that was built in stately.ai into the timer - in progress
-- add mobile responsivity
-- convert react component state of timer to XSTATE - done
-
-### Design
-- create a pixel perfect design of app - in progress
-- create screen flow for app usage - in progress
-
-# Installation
-
+### Installation
 ```bash
 yarn install
 ```
 
-# Running the development server
-
+### Running the app
 ```bash
 yarn dev
 ```
-
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+### Running ESLint
+```bash
+yarn next lint 
+```
+### Running Cypress Tests
+Running the following command brings up the Cypress Launchpad.
+```bash
+yarn runt cypress open 
+```
+
