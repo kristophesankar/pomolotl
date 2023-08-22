@@ -29,6 +29,9 @@ This chart maps the following states: focus, shortBreak and longBreak
 This chart maps the following states: idle, paused, running and completed
 ![state_chart_2](https://user-images.githubusercontent.com/33190221/235472190-231cc4f8-8bb9-4094-8d67-c71edfe94e24.png)
 
+# Todo
+The task list can be found [here](https://trello.com/b/WuOPUz20/pomolotl).
+
 # Getting Started
 
 ### Installation
