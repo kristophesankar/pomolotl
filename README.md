@@ -15,11 +15,16 @@
     Pomodoro - Axolotl. A pomodoro timer app built with NextJS and XSTATE.
   </b>
 </p>
+
 <p align="center">
+
 [![Netlify Status](https://api.netlify.com/api/v1/badges/48f52270-bed0-4624-a595-9315f9d6fd3a/deploy-status)](https://app.netlify.com/sites/doro-timer/deploys)
+
 </p>
-##
-Table Of Contents
+
+
+
+## Table Of Contents
 - [Background](#background)
 - [State Charts](#state-charts)
 - [Todo](#todo)
