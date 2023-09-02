@@ -5,7 +5,7 @@
         "@/components/*" : ["components/*"],
         "@/styles/*" : ["styles/*"],
         "@/config/*" : ["config/*"],
-        "@/fonts/*" : ["fonts/*"],
+        "@/fonts/*" : ["assets/fonts/*"],
         "@/stateMachines/*" : ["stateMachines/*"],
         "@/providers/*" : ["providers/*"],
       }
