@@ -1,20 +1,29 @@
-import { useContext } from 'react'
 import {
   headerFlex,
   header,
   sitename,
   logo,
-  iconDefault,
   settingsBtn,
 } from '../styles/Index.module.sass'
-import { IoIosHelpCircle } from 'react-icons/io'
-import { PageContext } from '@/providers/helpProvider'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import HelpIcon from './HelpIcon'
 export default function Header() {
-  const { page, setPage } = useContext(PageContext)
-  const newVal = page === 'timer' ? 'help' : 'timer'
-  const changeHandler = () => {
-    setPage(newVal)
+  const router = useRouter()
+  const [helpPath, setHelpPath] = useState('/')
+
+  const updatePath = () => {
+    return router.pathname === '/' ? '/help' : '/'
+  }
+
+  useEffect(() => {
+    setHelpPath(updatePath)
+  }, [helpPath])
+
+  const handleClick = () => {
+    setHelpPath(updatePath)
   }
 
   return (
@@ -31,8 +40,10 @@ export default function Header() {
         <span className={sitename}>pomolotl</span>
       </div>
       <div>
-        <button className={settingsBtn}>
-          <IoIosHelpCircle onClick={changeHandler} className={iconDefault} />
+        <button onClick={handleClick} className={settingsBtn}>
+          <Link href={helpPath}>
+            <HelpIcon name={helpPath} />
+          </Link>
         </button>
       </div>
     </div>
