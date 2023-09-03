@@ -1,4 +1,3 @@
-import { useState, useMemo } from 'react'
 import { container } from '@/styles/Index.module.sass'
 import { GlobalStateProvider } from '@/providers/globalState'
 import '@/styles/globals.sass'

@@ -11,19 +11,15 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import HelpIcon from './HelpIcon'
 export default function Header() {
-  const router = useRouter()
+  const { pathname } = useRouter()
   const [helpPath, setHelpPath] = useState('/')
 
-  const updatePath = () => {
-    return router.pathname === '/' ? '/help' : '/'
-  }
-
   useEffect(() => {
-    setHelpPath(updatePath)
-  }, [helpPath])
+    setHelpPath(pathname === '/' ? '/help' : '/')
+  }, [helpPath, pathname])
 
   const handleClick = () => {
-    setHelpPath(updatePath)
+    setHelpPath(pathname === '/' ? '/help' : '/')
   }
 
   return (
