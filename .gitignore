@@ -37,3 +37,6 @@ next-env.d.ts
 
 # tmux
 tmux-start.sh
+
+# environment variables
+.env
