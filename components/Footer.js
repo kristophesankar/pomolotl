@@ -1,9 +1,15 @@
-import { item, footer } from '../styles/Index.module.sass'
+import { item, footer, footerText } from '../styles/Index.module.sass'
 export default function Footer() {
   return (
     <div className={item}>
       <div className={footer}>
-        pomolotl
+        <div>Made with ❤️</div>
+        <a
+          className={footerText}
+          href="https://github.com/kristophesankar/pomolotl"
+        >
+          pomolotl.netlify.app
+        </a>
         <br />
       </div>
     </div>
